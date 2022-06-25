@@ -1,0 +1,19 @@
+
+select * from clima limit 5 offset 0 ;
+select * from clima limit 5 offset 5 ;
+select * from clima limit 5 offset 10 ;
+
+select min (cent) from clima where cent<20;
+select max (cent) from clima where cent>20;
+
+create or replace  view estadistica as
+
+select 'temperatura <10 ' as titulo,(count(cent) ) as estadistica from clima where cent <10
+union
+select 'tempratura 10-20 ' as titulo,(count(cent)) from clima where cent<=10 and cent <20
+union
+select 'temperetura -20 ' as titulo,count(cent) from clima where cent>20
+union
+select 'total' as titulo, count(cent) from clima order by estadistica asc;
+
+select * from estadistica
